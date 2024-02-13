@@ -20,7 +20,7 @@ ENV CA_CERTIFICATES_VERSION=20230311
 ENV NANO_VERSION=7.2-1
 # renovate: datasource=repology versioning=deb depName=debian_12/curl
 ENV CURL_VERSION=7.88.1-10+deb12u5
-# renovate: datasource=repology versioning=deb depName=debian_12/locales
+# renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LOCALES_VERSION=2.36-9+deb12u4
 
 RUN set -x \
