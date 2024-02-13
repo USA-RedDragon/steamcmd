@@ -1,7 +1,7 @@
 ############################################################
 # Dockerfile that contains SteamCMD
 ############################################################
-FROM debian:bookworm-slim as build_stage
+FROM debian:12.5-slim as build_stage
 
 LABEL maintainer="walentinlamonos@gmail.com"
 ARG PUID=1000
