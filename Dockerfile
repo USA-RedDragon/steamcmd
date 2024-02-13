@@ -10,9 +10,9 @@ ENV USER steam
 ENV HOMEDIR "/home/${USER}"
 ENV STEAMCMDDIR "${HOMEDIR}/steamcmd"
 
-# renovate: datasource=repology versioning=deb depName=debian_12/lib32stdc++6
+# renovate: datasource=repology versioning=deb depName=debian_12/gcc
 ENV LIB32STDCPP__6_VERSION=12.2.0-14
-# renovate: datasource=repology versioning=deb depName=debian_12/lib32gcc-s1
+# renovate: datasource=repology versioning=deb depName=debian_12/gcc
 ENV LIB32GCC_S1_VERSION=12.2.0-14
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
 ENV CA_CERTIFICATES_VERSION=20230311
