@@ -50,6 +50,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 FROM debian:12.5-slim as box-amd64
 
+# We don't install box86 here, as it's not needed for the amd64 architecture
+# but the ENV DEBUGGER line means that the box86 binary will always be invoked
+# So this script just runs the command it's given
+RUN echo '#!/bin/sh\nexec "$@"' > /usr/local/bin/box86 \
+    && chmod +x /usr/local/bin/box86 
+
 ARG TARGETARCH
 FROM box-${TARGETARCH}
 
@@ -84,9 +90,7 @@ RUN set -x \
         curl=${CURL_VERSION} \
         locales=${LOCALES_VERSION} \
     && if [ "${TARGETARCH}" = "amd64" ]; then \
-        echo '#!/bin/sh\nexec "$@"' > /usr/local/bin/box86 \
-        && chmod +x /usr/local/bin/box86 \
-        && apt-get install -y --no-install-recommends --no-install-suggests \
+        apt-get install -y --no-install-recommends --no-install-suggests \
             lib32stdc++6=${LIB32STDCPP__6_VERSION} \
             lib32gcc-s1=${LIB32GCC_S1_VERSION} \
         ; \
