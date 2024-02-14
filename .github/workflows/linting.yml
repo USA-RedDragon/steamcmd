@@ -1,0 +1,41 @@
+---
+name: Linting
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+
+run-name: Pull request - ${{ github.event.pull_request.number }}
+jobs:
+  dockerlint:
+    name: Lint - Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
+  markdownlint:
+    name: Lint - Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint - Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v15
+        with:
+          config: ".markdownlint.jsonc"
+          globs: "**/*.md"
+
+  yamllint:
+    name: Lint - Yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Lint - Yamllint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          config_file: .yamllint.yml
