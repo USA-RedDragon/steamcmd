@@ -1,7 +1,7 @@
 FROM debian:12.5-slim as box-arm64
 
 # renovate: datasource=repology versioning=deb depName=debian_12/python3.11
-ENV PYTHON3_VERSION=3.11.2-1+b1
+ENV PYTHON3_VERSION=3.11.2-6
 # renovate: datasource=repology versioning=deb depName=debian_12/git
 ENV GIT_VERSION=1:2.39.2-1.1
 # renovate: datasource=repology versioning=deb depName=debian_12/cmake
