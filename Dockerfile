@@ -1,13 +1,15 @@
 FROM debian:12.5-slim as box-arm64
 
 # renovate: datasource=repology versioning=deb depName=debian_12/python3.11
-ENV PYTHON3_VERSION=3.11.2-6
+ENV PYTHON3_VERSION=3.11.2-1+b1
 # renovate: datasource=repology versioning=deb depName=debian_12/git
-ENV GIT_VERSION=2.39.2-1.1
+ENV GIT_VERSION=1:2.39.2-1.1
 # renovate: datasource=repology versioning=deb depName=debian_12/cmake
 ENV CMAKE_VERSION=3.21.3-1
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
-ENV GCC_VERSION=12.2.0-14
+ENV GCC_VERSION=4:12.2.0-14
+# renovate: datasource=repology versioning=deb depName=debian_12/gcc-12
+ENV GPP_VERSION=4:12.2.0-3
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc-defaults
 ENV GCC_ARM_VERSION=12.2.0-3
 # renovate: datasource=repology versioning=deb depName=debian_12/cross-toolchain-base
@@ -37,7 +39,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         python3="${PYTHON3_VERSION}" \
         git="${GIT_VERSION}" \
         gcc="${GCC_VERSION}" \
-        g++="${GCC_VERSION}" \
+        g++="${GPP_VERSION}" \
         cmake="${CMAKE_VERSION}" \
         gcc-arm-linux-gnueabihf="${GCC_ARM_VERSION}" \
         libc6-dev-armhf-cross="${LIB6_DEV_ARMHF_CROSS_VERSION}" \
