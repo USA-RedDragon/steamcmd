@@ -1,11 +1,23 @@
 FROM debian:12.5-slim as box-arm64
 
+# renovate: datasource=repology versioning=deb depName=debian_12/python3.11
+ENV PYTHON3_VERSION=3.11.2-6
+# renovate: datasource=repology versioning=deb depName=debian_12/git
+ENV GIT_VERSION=2.39.2-1.1
+# renovate: datasource=repology versioning=deb depName=debian_12/cmake
+ENV CMAKE_VERSION=3.21.3-1
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
-ENV LIBSTDCPP__6_VERSION=12.2.0-14
+ENV GCC_VERSION=12.2.0-14
+# renovate: datasource=repology versioning=deb depName=debian_12/gcc-defaults
+ENV GCC_ARM_VERSION=12.2.0-3
+# renovate: datasource=repology versioning=deb depName=debian_12/cross-toolchain-base
+ENV LIB6_DEV_ARMHF_CROSS_VERSION=2.36-8cross1
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LIBC6_VERSION=2.36-9+deb12u4
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
 ENV CA_CERTIFICATES_VERSION=20230311
+# renovate: datasource=repology versioning=deb depName=debian_12/gcc
+ENV LIBSTDCPP__6_VERSION=12.2.0-14
 
 # After box86 v0.3.5 releases, swap to git-tags
 # renovate: datasource=git-refs versioning=git depName=https://github.com/ptitSeb/box86.git
@@ -22,12 +34,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && dpkg --add-architecture armhf \
     && apt-get update \
     && apt-get install --yes --no-install-recommends --no-install-suggests \
-        python3 \
-        git \
-        build-essential \
-        cmake \
-        gcc-arm-linux-gnueabihf \
-        libc6-dev-armhf-cross \
+        python3="${PYTHON3_VERSION}" \
+        git="${GIT_VERSION}" \
+        gcc="${GCC_VERSION}" \
+        g++="${GCC_VERSION}" \
+        cmake="${CMAKE_VERSION}" \
+        gcc-arm-linux-gnueabihf="${GCC_ARM_VERSION}" \
+        libc6-dev-armhf-cross="${LIB6_DEV_ARMHF_CROSS_VERSION}" \
         ca-certificates="${CA_CERTIFICATES_VERSION}" \
         libc6:armhf="${LIBC6_VERSION}" \
         libstdc++6:armhf="${LIBSTDCPP__6_VERSION}" \
