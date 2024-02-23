@@ -5,7 +5,7 @@ ENV PYTHON3_VERSION=3.11.2-1+b1
 # renovate: datasource=repology versioning=deb depName=debian_12/git
 ENV GIT_VERSION=1:2.39.2-1.1
 # renovate: datasource=repology versioning=deb depName=debian_12/cmake
-ENV CMAKE_VERSION=3.21.3-1
+ENV CMAKE_VERSION=3.25.1-1
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LIBC6_VERSION=2.36-9+deb12u4
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
