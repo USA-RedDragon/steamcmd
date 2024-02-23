@@ -38,6 +38,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         cmake="${CMAKE_VERSION}" \
         ca-certificates="${CA_CERTIFICATES_VERSION}" \
     && dpkg --add-architecture armhf \
+    && apt-get update \
     && apt-get install --yes --no-install-recommends --no-install-suggests \
         libc6:armhf="${LIBC6_VERSION}" \
         libstdc++6:armhf="${LIBSTDCPP__6_VERSION}" \
