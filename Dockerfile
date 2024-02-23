@@ -60,6 +60,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         cmake \
         gcc-arm-linux-gnueabihf \
         ca-certificates \
+        libc6-dev-armhf-cross \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
