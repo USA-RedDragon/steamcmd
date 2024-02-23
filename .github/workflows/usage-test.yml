@@ -29,7 +29,7 @@ jobs:
 
       - name: Run steamcmd
         run: |
-            docker run --rm -it -d \
+            docker run --rm -it \
             -v ./palworld:/palworld \
             --stop-timeout 30 \
             ${{ github.run_id }} \
@@ -58,7 +58,7 @@ jobs:
 
       - name: Run steamcmd
         run: |
-            docker run --rm -it -d \
+            docker run --rm -it \
             --platform linux/arm64 \
             -v ./palworld:/palworld \
             --stop-timeout 30 \
