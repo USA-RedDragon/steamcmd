@@ -8,10 +8,8 @@ ENV GIT_VERSION=1:2.39.2-1.1
 ENV CMAKE_VERSION=3.21.3-1
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
 ENV GCC_VERSION=4:12.2.0-14
-# renovate: datasource=repology versioning=deb depName=debian_12/gcc-12
-ENV GPP_VERSION=4:12.2.0-3
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc-defaults
-ENV GCC_ARM_VERSION=12.2.0-3
+ENV GPP_VERSION=4:12.2.0-3
 # renovate: datasource=repology versioning=deb depName=debian_12/cross-toolchain-base
 ENV LIB6_DEV_ARMHF_CROSS_VERSION=2.36-8cross1
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
@@ -41,7 +39,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         gcc="${GCC_VERSION}" \
         g++="${GPP_VERSION}" \
         cmake="${CMAKE_VERSION}" \
-        gcc-arm-linux-gnueabihf="${GCC_ARM_VERSION}" \
+        gcc-arm-linux-gnueabihf="${GPP_VERSION}" \
         libc6-dev-armhf-cross="${LIB6_DEV_ARMHF_CROSS_VERSION}" \
         ca-certificates="${CA_CERTIFICATES_VERSION}" \
         libc6:armhf="${LIBC6_VERSION}" \
