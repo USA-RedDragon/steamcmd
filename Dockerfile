@@ -41,7 +41,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && make install \
     && cd /box64/build \
     && cmake .. -DARM64=1 -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-    && make -j$(nproc) \
+    && make -j"$(nproc)" \
     && make install \
     && apt-get remove --yes --purge \
         python3 \
