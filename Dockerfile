@@ -121,3 +121,5 @@ RUN curl -fsSL 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.
     && ln -s "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMDDIR}/steam.sh"
 
 USER ${USER}
+
+ENTRYPOINT ["${STEAMCMDDIR}/steamcmd.sh"]
