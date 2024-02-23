@@ -14,7 +14,11 @@ ENV BOX86_REF=8378f9b307a1efd12aa056f8131a6d78361ee2e1
 # renovate: datasource=git-tags depName=https://github.com/ptitSeb/box64.git
 ENV BOX64_VERSION=v0.2.6
 
-RUN export DEBIAN_FRONTEND=noninteractive \
+# We don't want to use WORKDIR here because we won't have these dirs in the file image
+# hadolint ignore=DL3003
+RUN \
+    set -euo pipefail \
+    export DEBIAN_FRONTEND=noninteractive \
     && dpkg --add-architecture armhf \
     && apt-get update \
     && apt-get install --yes --no-install-recommends --no-install-suggests \
@@ -47,17 +51,20 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         gcc-arm-linux-gnueabihf \
         ca-certificates \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 FROM debian:12.5-slim as box-amd64
 
 # We don't install box86 here, as it's not needed for the amd64 architecture
 # but the ENV DEBUGGER line means that the box86 binary will always be invoked
 # So this script just runs the command it's given
-RUN echo '#!/bin/sh\nexec "$@"' > /usr/local/bin/box86 \
-    && chmod +x /usr/local/bin/box86 
+RUN printf '#!/bin/sh\nexec "$@"' > /usr/local/bin/box86 \
+    && chmod +x /usr/local/bin/box86
 
 ARG TARGETARCH
+# Ignoring the lack of a tag here because the tag is defined in the above FROM lines
+# and hadolint isn't aware of those.
+# hadolint ignore=DL3006
 FROM box-${TARGETARCH}
 
 LABEL maintainer="walentinlamonos@gmail.com"
@@ -82,7 +89,7 @@ ENV CURL_VERSION=7.88.1-10+deb12u5
 ENV LOCALES_VERSION=2.36-9+deb12u4
 
 ARG TARGETARCH
-RUN set -x \
+RUN set -euo pipefail \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
@@ -99,7 +106,7 @@ RUN set -x \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && dpkg-reconfigure locales \
     # Create unprivileged user
-    && useradd -u "${PUID}" -m "${USER}" \
+    && useradd -u "${PUID}" -m "${USER}" -l \
     && rm -rf /var/lib/apt/lists/*
 
 # Symlink steamclient.so; So misconfigured dedicated servers can find it
