@@ -14,11 +14,11 @@ ENV BOX86_REF=8378f9b307a1efd12aa056f8131a6d78361ee2e1
 # renovate: datasource=git-tags depName=https://github.com/ptitSeb/box64.git
 ENV BOX64_VERSION=v0.2.6
 
+SHELL [ "bash", "-o", "pipefail", "-c" ]
+
 # We don't want to use WORKDIR here because we won't have these dirs in the file image
 # hadolint ignore=DL3003
-RUN \
-    set -euo pipefail \
-    export DEBIAN_FRONTEND=noninteractive \
+RUN export DEBIAN_FRONTEND=noninteractive \
     && dpkg --add-architecture armhf \
     && apt-get update \
     && apt-get install --yes --no-install-recommends --no-install-suggests \
@@ -28,16 +28,16 @@ RUN \
         cmake \
         gcc-arm-linux-gnueabihf \
         libc6-dev-armhf-cross \
-        ca-certificates=${CA_CERTIFICATES_VERSION} \
-        libc6:armhf=${LIBC6_VERSION} \
-        libstdc++6:armhf=${LIBSTDCPP__6_VERSION} \
+        ca-certificates="${CA_CERTIFICATES_VERSION}" \
+        libc6:armhf="${LIBC6_VERSION}" \
+        libstdc++6:armhf="${LIBSTDCPP__6_VERSION}" \
     && git clone --single-branch https://github.com/ptitSeb/box86.git; mkdir /box86/build \
-    && git clone -b ${BOX64_VERSION} --single-branch https://github.com/ptitSeb/box64.git; mkdir /box64/build \
+    && git clone -b "${BOX64_VERSION}" --single-branch https://github.com/ptitSeb/box64.git; mkdir /box64/build \
     && cd /box86 \
-    && git checkout ${BOX86_VERSION} \
+    && git checkout "${BOX86_VERSION}" \
     && cd /box86/build \
     && cmake .. -DARM64=1 -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-    && make -j$(nproc) \
+    && make -j"$(nproc)" \
     && make install \
     && cd /box64/build \
     && cmake .. -DARM64=1 -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo \
@@ -88,19 +88,20 @@ ENV CURL_VERSION=7.88.1-10+deb12u5
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LOCALES_VERSION=2.36-9+deb12u4
 
+SHELL [ "bash", "-o", "pipefail", "-c" ]
+
 ARG TARGETARCH
-RUN set -euo pipefail \
-    && export DEBIAN_FRONTEND=noninteractive \
+RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
-        ca-certificates=${CA_CERTIFICATES_VERSION} \
-        nano=${NANO_VERSION} \
-        curl=${CURL_VERSION} \
-        locales=${LOCALES_VERSION} \
+        ca-certificates="${CA_CERTIFICATES_VERSION}" \
+        nano="${NANO_VERSION}" \
+        curl="${CURL_VERSION}" \
+        locales="${LOCALES_VERSION}" \
     && if [ "${TARGETARCH}" = "amd64" ]; then \
         apt-get install -y --no-install-recommends --no-install-suggests \
-            lib32stdc++6=${LIB32STDCPP__6_VERSION} \
-            lib32gcc-s1=${LIB32GCC_S1_VERSION} \
+            lib32stdc++6="${LIB32STDCPP__6_VERSION}" \
+            lib32gcc-s1="${LIB32GCC_S1_VERSION}" \
         ; \
     fi \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
