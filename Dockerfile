@@ -11,7 +11,7 @@ ENV GCC_VERSION=4:12.2.0-14
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc-defaults
 ENV GPP_VERSION=4:12.2.0-3
 # renovate: datasource=repology versioning=deb depName=debian_12/cross-toolchain-base
-ENV LIB6_DEV_ARMHF_CROSS_VERSION=2.36-8cross1
+ENV LIB6_DEV_ARMHF_CROSS_VERSION=66
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LIBC6_VERSION=2.36-9+deb12u4
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
