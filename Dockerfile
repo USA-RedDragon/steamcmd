@@ -26,7 +26,6 @@ SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 # DL3008: I'm not versioning the compilers, repology doesn't quite work for those
 # hadolint ignore=DL3003,DL3008
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && dpkg --add-architecture armhf \
     && apt-get update \
     && apt-get install --yes --no-install-recommends --no-install-suggests \
         # Unversioned
@@ -38,6 +37,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         git="${GIT_VERSION}" \
         cmake="${CMAKE_VERSION}" \
         ca-certificates="${CA_CERTIFICATES_VERSION}" \
+    && dpkg --add-architecture armhf \
+    && apt-get install --yes --no-install-recommends --no-install-suggests \
         libc6:armhf="${LIBC6_VERSION}" \
         libstdc++6:armhf="${LIBSTDCPP__6_VERSION}" \
     && git clone --single-branch https://github.com/ptitSeb/box86.git; mkdir /box86/build \
