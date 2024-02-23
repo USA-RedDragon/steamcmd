@@ -27,7 +27,6 @@ jobs:
         run: |
             docker run --rm -it -d \
             -v ./palworld:/palworld \
-            --restart unless-stopped \
             --stop-timeout 30 \
             ${{ github.run_id }} \
             +force_install_dir /palworld +login anonymous +app_update 2394010 validate +quit
@@ -58,7 +57,6 @@ jobs:
             docker run --rm -it -d \
             --platform linux/arm64 \
             -v ./palworld:/palworld \
-            --restart unless-stopped \
             --stop-timeout 30 \
             ${{ github.run_id }} \
             +force_install_dir /palworld +login anonymous +app_update 2394010 validate +quit
