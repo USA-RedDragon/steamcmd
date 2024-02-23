@@ -14,7 +14,7 @@ ENV BOX86_REF=8378f9b307a1efd12aa056f8131a6d78361ee2e1
 # renovate: datasource=git-tags depName=https://github.com/ptitSeb/box64.git
 ENV BOX64_VERSION=v0.2.6
 
-SHELL [ "bash", "-o", "pipefail", "-c" ]
+SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
 # We don't want to use WORKDIR here because we won't have these dirs in the file image
 # hadolint ignore=DL3003
@@ -88,7 +88,7 @@ ENV CURL_VERSION=7.88.1-10+deb12u5
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LOCALES_VERSION=2.36-9+deb12u4
 
-SHELL [ "bash", "-o", "pipefail", "-c" ]
+SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
 ARG TARGETARCH
 RUN export DEBIAN_FRONTEND=noninteractive \
