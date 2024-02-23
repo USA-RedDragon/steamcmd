@@ -6,12 +6,6 @@ ENV PYTHON3_VERSION=3.11.2-1+b1
 ENV GIT_VERSION=1:2.39.2-1.1
 # renovate: datasource=repology versioning=deb depName=debian_12/cmake
 ENV CMAKE_VERSION=3.21.3-1
-# renovate: datasource=repology versioning=deb depName=debian_12/gcc
-ENV GCC_VERSION=4:12.2.0-14
-# renovate: datasource=repology versioning=deb depName=debian_12/gcc-defaults
-ENV GPP_VERSION=4:12.2.0-3
-# renovate: datasource=repology versioning=deb depName=debian_12/cross-toolchain-base
-ENV LIB6_DEV_ARMHF_CROSS_VERSION=2.36-8cross1
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LIBC6_VERSION=2.36-9+deb12u4
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
@@ -28,19 +22,21 @@ ENV BOX64_VERSION=v0.2.6
 
 SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
-# We don't want to use WORKDIR here because we won't have these dirs in the file image
-# hadolint ignore=DL3003
+# DL3003: We don't want to use WORKDIR here because we won't have these dirs in the file image
+# DL3008: I'm not versioning the compilers, repology doesn't quite work for those
+# hadolint ignore=DL3003,DL3008
 RUN export DEBIAN_FRONTEND=noninteractive \
     && dpkg --add-architecture armhf \
     && apt-get update \
     && apt-get install --yes --no-install-recommends --no-install-suggests \
+        # Unversioned
+        build-essential \
+        gcc-arm-linux-gnueabihf \
+        libc6-dev-armhf-cross \
+        # Versioned
         python3="${PYTHON3_VERSION}" \
         git="${GIT_VERSION}" \
-        gcc="${GCC_VERSION}" \
-        g++="${GPP_VERSION}" \
         cmake="${CMAKE_VERSION}" \
-        gcc-arm-linux-gnueabihf="${GPP_VERSION}" \
-        libc6-dev-armhf-cross="${LIB6_DEV_ARMHF_CROSS_VERSION}" \
         ca-certificates="${CA_CERTIFICATES_VERSION}" \
         libc6:armhf="${LIBC6_VERSION}" \
         libstdc++6:armhf="${LIBSTDCPP__6_VERSION}" \
