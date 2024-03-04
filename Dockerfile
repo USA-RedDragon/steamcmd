@@ -16,7 +16,7 @@ ENV LIBSTDCPP__6_VERSION=12.2.0-14
 # After box86 v0.3.5 releases, swap to git-tags
 # renovate: datasource=git-refs versioning=git depName=https://github.com/ptitSeb/box86.git
 ENV BOX86_VERSION=master
-ENV BOX86_REF=ec77755952c62f94b85746d282644573c23bd589
+ENV BOX86_REF=82f610faee6a3da86d5c6f2c365e8dbc40165233
 # renovate: datasource=git-tags depName=https://github.com/ptitSeb/box64.git
 ENV BOX64_VERSION=v0.2.6
 
