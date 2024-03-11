@@ -55,7 +55,7 @@ jobs:
       load-image-repository: ${{ github.repository }}
       load-image-run-id: ${{ github.run_id }}
       build-args: |
-        STEAMCMD_IMAGE=steamcmd-amd64-${{ github.run_id }}
+        STEAMCMD_IMAGE=localhost:5000/steamcmd-amd64-${{ github.run_id }}
 
   usage-test-arm64:
     name: Usage test (arm64)
@@ -107,4 +107,4 @@ jobs:
       load-image-run-id: ${{ github.run_id }}
       checkout: USA-RedDragon/palworld-server-docker
       build-args: |
-        STEAMCMD_IMAGE=steamcmd-arm64-${{ github.run_id }}
+        STEAMCMD_IMAGE=localhost:5000/steamcmd-arm64-${{ github.run_id }}
