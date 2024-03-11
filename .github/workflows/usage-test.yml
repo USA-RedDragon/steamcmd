@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   usage-test-amd64:
-    name: Docker - Test (amd64)
+    name: Usage test (amd64)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,21 +22,43 @@ jobs:
       - name: Build and export to Docker
         uses: docker/build-push-action@v5
         with:
-          load: true
           push: false
-          tags: ${{ github.run_id }}
+          tags: steamcmd-amd64-${{ github.run_id }}
+          outputs: type=docker,dest=/tmp/steamcmd-amd64-${{ github.run_id }}.tar
           platforms: linux/amd64
+
+      - name: Load image
+        run: docker load -i /tmp/steamcmd-amd64-${{ github.run_id }}.tar
 
       - name: Run steamcmd
         run: |
             docker run --rm -i \
             -v ./palworld:/palworld \
             --stop-timeout 30 \
-            ${{ github.run_id }} \
+            steamcmd-amd64-${{ github.run_id }} \
             +force_install_dir /palworld +login anonymous +app_update 2394010 validate +quit
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: steamcmd-amd64-${{ github.run_id }}
+          path: /tmp/steamcmd-amd64-${{ github.run_id }}.tar
+
+  e2e-test-amd64:
+    needs: usage-test-amd64
+    name: End to end test (amd64)
+    uses: USA-RedDragon/palworld-server-docker/.github/workflows/e2e-checks.yaml@main
+    with:
+      platform: amd64
+      checkout: USA-RedDragon/palworld-server-docker
+      load-image: steamcmd-amd64-${{ github.run_id }}
+      load-image-repository: ${{ github.repository }}
+      load-image-run-id: ${{ github.run_id }}
+      build-args: |
+        STEAMCMD_IMAGE=steamcmd-amd64-${{ github.run_id }}
+
   usage-test-arm64:
-    name: Docker - Test (arm64)
+    name: Usage test (arm64)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,10 +73,13 @@ jobs:
       - name: Build and export to Docker
         uses: docker/build-push-action@v5
         with:
-          load: true
           push: false
-          tags: ${{ github.run_id }}
+          tags: steamcmd-arm64-${{ github.run_id }}
+          outputs: type=docker,dest=/tmp/steamcmd-arm64-${{ github.run_id }}.tar
           platforms: linux/arm64
+
+      - name: Load image
+        run: docker load -i /tmp/steamcmd-arm64-${{ github.run_id }}.tar
 
       - name: Run steamcmd
         run: |
@@ -62,5 +87,24 @@ jobs:
             --platform linux/arm64 \
             -v ./palworld:/palworld \
             --stop-timeout 30 \
-            ${{ github.run_id }} \
+            steamcmd-arm64-${{ github.run_id }} \
             +force_install_dir /palworld +login anonymous +app_update 2394010 validate +quit
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: steamcmd-arm64-${{ github.run_id }}
+          path: /tmp/steamcmd-arm64-${{ github.run_id }}.tar
+
+  e2e-test-arm64:
+    needs: usage-test-arm64
+    name: End to end test (arm64)
+    uses: USA-RedDragon/palworld-server-docker/.github/workflows/e2e-checks.yaml@main
+    with:
+      platform: arm64
+      load-image: steamcmd-arm64-${{ github.run_id }}
+      load-image-repository: ${{ github.repository }}
+      load-image-run-id: ${{ github.run_id }}
+      checkout: USA-RedDragon/palworld-server-docker
+      build-args: |
+        STEAMCMD_IMAGE=steamcmd-arm64-${{ github.run_id }}
