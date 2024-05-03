@@ -7,7 +7,7 @@ ENV GIT_VERSION=1:2.39.2-1.1
 # renovate: datasource=repology versioning=deb depName=debian_12/cmake
 ENV CMAKE_VERSION=3.25.1-1
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
-ENV LIBC6_VERSION=2.36-9+deb12u4
+ENV LIBC6_VERSION=2.36-9+deb12u7
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
 ENV CA_CERTIFICATES_VERSION=20230311
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
@@ -98,7 +98,7 @@ ENV NANO_VERSION=7.2-1
 # renovate: datasource=repology versioning=deb depName=debian_12/curl
 ENV CURL_VERSION=7.88.1-10+deb12u5
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
-ENV LOCALES_VERSION=2.36-9+deb12u4
+ENV LOCALES_VERSION=2.36-9+deb12u7
 
 SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
