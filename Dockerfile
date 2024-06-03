@@ -13,10 +13,8 @@ ENV CA_CERTIFICATES_VERSION=20230311
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
 ENV LIBSTDCPP__6_VERSION=12.2.0-14
 
-# After box86 v0.3.5 releases, swap to git-tags
-# renovate: datasource=git-refs versioning=git depName=https://github.com/ptitSeb/box86.git
-ENV BOX86_VERSION=master
-ENV BOX86_REF=2e589f42fe7a29ced421af221ceb928a3966b54c
+# renovate: datasource=git-tags depName=https://github.com/ptitSeb/box86.git
+ENV BOX86_VERSION=v0.3.6
 # renovate: datasource=git-tags depName=https://github.com/ptitSeb/box64.git
 ENV BOX64_VERSION=v0.2.6
 
@@ -42,10 +40,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install --yes --no-install-recommends --no-install-suggests \
         libc6:armhf="${LIBC6_VERSION}" \
         libstdc++6:armhf="${LIBSTDCPP__6_VERSION}" \
-    && git clone --single-branch https://github.com/ptitSeb/box86.git; mkdir /box86/build \
+    && git clone -b "${BOX86_VERSION}" --single-branch https://github.com/ptitSeb/box86.git; mkdir /box86/build \
     && git clone -b "${BOX64_VERSION}" --single-branch https://github.com/ptitSeb/box64.git; mkdir /box64/build \
-    && cd /box86 \
-    && git checkout "${BOX86_VERSION}" \
     && cd /box86/build \
     && cmake .. -DARM64=1 -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     && make -j"$(nproc)" \
