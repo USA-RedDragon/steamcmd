@@ -90,7 +90,7 @@ ENV LIB32GCC_S1_VERSION=12.2.0-14
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
 ENV CA_CERTIFICATES_VERSION=20230311
 # renovate: datasource=repology versioning=deb depName=debian_12/nano
-ENV NANO_VERSION=7.2-1
+ENV NANO_VERSION=7.2-1+deb12u1
 # renovate: datasource=repology versioning=deb depName=debian_12/curl
 ENV CURL_VERSION=7.88.1-10+deb12u5
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
