@@ -14,7 +14,7 @@ ENV CA_CERTIFICATES_VERSION=20230311
 ENV LIBSTDCPP__6_VERSION=12.2.0-14
 
 # renovate: datasource=git-tags depName=https://github.com/ptitSeb/box86.git
-ENV BOX86_VERSION=v0.3.6
+ENV BOX86_VERSION=v0.3.8
 # renovate: datasource=git-tags depName=https://github.com/ptitSeb/box64.git
 ENV BOX64_VERSION=v0.2.6
 
