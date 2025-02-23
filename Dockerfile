@@ -1,13 +1,13 @@
 FROM debian:12.5-slim as box-arm64
 
 # renovate: datasource=repology versioning=deb depName=debian_12/python3.11
-ENV PYTHON3_VERSION=3.11.2-6
+ENV PYTHON3_VERSION=3.11.2-6+deb12u5
 # renovate: datasource=repology versioning=deb depName=debian_12/git
-ENV GIT_VERSION=1:2.39.2-1.1
+ENV GIT_VERSION=1:2.39.5-0+deb12u2
 # renovate: datasource=repology versioning=deb depName=debian_12/cmake
 ENV CMAKE_VERSION=3.25.1-1
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
-ENV LIBC6_VERSION=2.36-9+deb12u7
+ENV LIBC6_VERSION=2.36-9+deb12u9
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
 ENV CA_CERTIFICATES_VERSION=20230311
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
@@ -90,11 +90,11 @@ ENV LIB32GCC_S1_VERSION=12.2.0-14
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
 ENV CA_CERTIFICATES_VERSION=20230311
 # renovate: datasource=repology versioning=deb depName=debian_12/nano
-ENV NANO_VERSION=7.2-1
+ENV NANO_VERSION=7.2-1+deb12u1
 # renovate: datasource=repology versioning=deb depName=debian_12/curl
-ENV CURL_VERSION=7.88.1-10+deb12u5
+ENV CURL_VERSION=7.88.1-10+deb12u8
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
-ENV LOCALES_VERSION=2.36-9+deb12u7
+ENV LOCALES_VERSION=2.36-9+deb12u9
 
 SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
