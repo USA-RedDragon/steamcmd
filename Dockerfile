@@ -1,4 +1,4 @@
-FROM debian:12.5-slim as box-arm64
+FROM debian:12.10-slim as box-arm64
 
 # renovate: datasource=repology versioning=deb depName=debian_12/python3.11
 ENV PYTHON3_VERSION=3.11.2-6
@@ -61,7 +61,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-FROM debian:12.5-slim as box-amd64
+FROM debian:12.10-slim as box-amd64
 
 # We don't install box86 here, as it's not needed for the amd64 architecture
 # but the ENV DEBUGGER line means that the box86 binary will always be invoked
