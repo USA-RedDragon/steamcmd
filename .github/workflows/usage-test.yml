@@ -20,7 +20,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and export to Docker
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           push: false
           tags: steamcmd-amd64-${{ github.run_id }}
@@ -68,7 +68,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and export to Docker
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           push: false
           tags: steamcmd-arm64-${{ github.run_id }}
