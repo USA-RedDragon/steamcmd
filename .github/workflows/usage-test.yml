@@ -59,7 +59,7 @@ jobs:
 
   usage-test-arm64:
     name: Usage test (arm64)
-    runs-on: ubuntu-latest-arm
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
