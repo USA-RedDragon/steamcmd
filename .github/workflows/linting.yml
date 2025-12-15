@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Lint - Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v16
+        uses: DavidAnson/markdownlint-cli2-action@30a0e04f1870d58f8d717450cc6134995f993c63 # v21.0.0
         with:
           config: ".markdownlint.jsonc"
           globs: "**/*.md"
