@@ -39,7 +39,7 @@ jobs:
             +force_install_dir /palworld +login anonymous +app_update 2394010 validate +quit
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: steamcmd-amd64-${{ github.run_id }}
           path: /tmp/steamcmd-amd64-${{ github.run_id }}.tar
@@ -88,7 +88,7 @@ jobs:
             +force_install_dir /palworld +login anonymous +app_update 2394010 validate +quit
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: steamcmd-arm64-${{ github.run_id }}
           path: /tmp/steamcmd-arm64-${{ github.run_id }}.tar
