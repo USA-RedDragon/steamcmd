@@ -9,7 +9,7 @@ ENV CMAKE_VERSION=3.25.1-1
 # renovate: datasource=repology versioning=deb depName=debian_12/glibc
 ENV LIBC6_VERSION=2.36-9+deb12u7
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
-ENV CA_CERTIFICATES_VERSION=20230311
+ENV CA_CERTIFICATES_VERSION=20250419~deb12u1
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
 ENV LIBSTDCPP__6_VERSION=12.2.0-14
 
@@ -88,7 +88,7 @@ ENV LIB32STDCPP__6_VERSION=12.2.0-14
 # renovate: datasource=repology versioning=deb depName=debian_12/gcc
 ENV LIB32GCC_S1_VERSION=12.2.0-14
 # renovate: datasource=repology versioning=deb depName=debian_12/ca-certificates
-ENV CA_CERTIFICATES_VERSION=20230311
+ENV CA_CERTIFICATES_VERSION=20250419~deb12u1
 # renovate: datasource=repology versioning=deb depName=debian_12/nano
 ENV NANO_VERSION=7.2-1
 # renovate: datasource=repology versioning=deb depName=debian_12/curl
